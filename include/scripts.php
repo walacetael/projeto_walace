@@ -1,6 +1,8 @@
 <script src=".././js/jquery-2.1.4.min.js"></script><!-- jQuery library -->
 <script src=".././js/smoothscroll.js"></script>
 <script src=".././js/bootstrap.min.js"></script> 
+<script src=".././js/bootstrap.bundle.min.js"></script> 
+<script src=".././js/popper.min.js"></script> 
 <script src=".././js/wow.min.js"></script>
 <script src=".././js/isotope.pkgd.min.js"></script>
 <script src=".././js/typed.js"></script>
