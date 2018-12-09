@@ -1,6 +1,5 @@
 <?php include('include/header.php'); ?>
 <body class="diag">
-    
 <!-- barra de navegaçao -->
 <div class="loader-wrapper">
     <div class="loader"></div>
