@@ -1,7 +1,7 @@
-<?php 
-global $scripts;
-$scripts = ""; ?>
 <?php include('../include/header.php') ?>
+<?php include('../funcoes/funcoes.php'); ?>
+<?php $consulta = select('consultas JOIN paciente ON paciente.id=consultas.paciente_id JOIN obstetra ON obstetra.id = consultas.obstetra_id ','*');  ?>
+<?php var_dump($consulta)?>
 
 
 
@@ -35,7 +35,7 @@ $scripts = ""; ?>
                             <div class="col-12">
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Home</a>
+                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Consulta</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Profile</a>
@@ -45,7 +45,33 @@ $scripts = ""; ?>
                             </li>
                             </ul>
                             <div class="tab-content" id="myTabContent">
-                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">.3hfhsfh.</div>
+                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                            
+                            <table class="table table-dark">
+  <thead>
+    <tr>
+      <th scope="col">Paciente</th>
+      <th scope="col">Obstetra</th>
+      <th scope="col">Horario</th>
+    </tr>
+  </thead>
+  <tbody>
+<?php foreach($consulta as $chave){ ?>
+    <tr>
+      <th> <?php echo($chave['paciente_id'])  ?> </th>
+      <th> <?php echo($chave['obstetra_id'])  ?> </th>
+      <th> <?php echo($chave['horario_id'])  ?> </th>
+    </tr>
+<?php } ?>
+  
+  
+  </tbody>
+</table>
+                        
+
+
+
+                            </div>
                             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">.123dsgdfg..</div>
                             <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">..123dfgdfg33.</div>
                             </div>
