@@ -18,12 +18,12 @@ JOIN paciente ON consultas.obstetra_id = paciente.id','obstetra.nome as nome_obs
                                 <div class="image-container">
                                     <img src="http://placehold.it/150x150" id="imgProfile" style="width: 150px; height: 150px" class="img-thumbnail" />
                                     <div class="middle">
-                                        <input type="button" class="btn btn-secondary" id="btnChangePicture" value="Change" />
+                                        <input type="button" style="width: 150px; margin-top:7px" class="btn btn-secondary" id="btnChangePicture" value="foto" />
                                         <input type="file" style="display: none;" id="profilePicture" name="file" />
                                     </div>
                                 </div>
                                 <div class="userData ml-3">
-                                    <h2 class="d-block" style="font-size: 1.5rem; font-weight: bold"><a href="javascript:void(0);">Some Name</a></h2>
+                                    <h2 class="d-block" style="font-size: 1.5rem; font-weight: bold"><a href="javascript:void(0);">Walace Da Silva Moreira</a></h2>
                                     <h6 class="d-block"><a href="javascript:void(0)">1,500</a> Video Uploads</h6>
                                     <h6 class="d-block"><a href="javascript:void(0)">300</a> Blog Posts</h6>
                                 </div>
@@ -37,17 +37,35 @@ JOIN paciente ON consultas.obstetra_id = paciente.id','obstetra.nome as nome_obs
                             <div class="col-12">
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Consulta</a>
+                                <a class="nav-link" id="consultas-tab" data-toggle="tab" href="#consultas" role="tab" aria-controls="consultas" aria-selected="false">Consultas</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Profile</a>
+                                <a class="nav-link" id="obstetra-tab" data-toggle="tab" href="#obstetra" role="tab" aria-controls="obstetra" aria-selected="false">Obstetra</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Contact</a>
+                                <a class="nav-link" id="atend-tab" data-toggle="tab" href="#atend" role="tab" aria-controls="atend" aria-selected="false">Atendimento</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="paciente-tab" data-toggle="tab" href="#paciente" role="tab" aria-controls="paciente" aria-selected="false">Paciente</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="relat-tab" data-toggle="tab" href="#relat" role="tab" aria-controls="relat" aria-selected="false">Relatorio de Erros</a>
                             </li>
                             </ul>
                             <div class="tab-content" id="myTabContent">
-                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                            <div class="tab-pane fade" id="atend" role="tabpanel" aria-labelledby="consultas-tab">
+                            atend
+                            </div>
+                            <div class="tab-pane fade" id="obstetra" role="tabpanel" aria-labelledby="consultas-tab">
+                            obstetra
+                            </div>
+                            <div class="tab-pane fade" id="paciente" role="tabpanel" aria-labelledby="consultas-tab">
+                            paciente
+                            </div>
+                            <div class="tab-pane fade" id="relat" role="tabpanel" aria-labelledby="consultas-tab">
+                            relat
+                            </div>
+                            <div class="tab-pane fade" id="consultas" role="tabpanel" aria-labelledby="consultas-tab">
                             
                             <table class="table table-dark">
   <thead>
@@ -70,13 +88,7 @@ JOIN paciente ON consultas.obstetra_id = paciente.id','obstetra.nome as nome_obs
   
   </tbody>
 </table>
-                        
-
-
-
-                            </div>
-                            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">.123dsgdfg..</div>
-                            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">..123dfgdfg33.</div>
+  </div>
                             </div>
                             </div>
                         </div>
