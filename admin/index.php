@@ -1,7 +1,5 @@
-<?php 
-global $scripts;
-$scripts = ""; ?>
 <?php include('../include/header.php') ?>
+<?php include('../funcoes/funcoes.php'); ?>
 
 
 
@@ -41,7 +39,6 @@ $scripts = ""; ?>
                                 <a class="nav-link" id="obstetra-tab" data-toggle="tab" href="#obstetra" role="tab" aria-controls="obstetra" aria-selected="false">Obstetra</a>
                             </li>
                             <li class="nav-item">
-                            <li class="nav-item">
                                 <a class="nav-link" id="atend-tab" data-toggle="tab" href="#atend" role="tab" aria-controls="atend" aria-selected="false">Atendimento</a>
                             </li>
                             <li class="nav-item">
@@ -52,17 +49,28 @@ $scripts = ""; ?>
                             </li>
                             </ul>
                             <div class="tab-content" id="myTabContent">
-                            <div class="tab-pane fade show active" id="dados" role="tabpanel" aria-labelledby="dados-tab">
-                                .3hfhsfh.
-                                fasfasfsaf
-                            </div>
-                            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                                .123dsgdfg..
-                                fsfasfa
-                            </div>
                             <div class="tab-pane fade" id="consultas" role="tabpanel" aria-labelledby="consultas-tab">
-                                ..123dfgdfg33.
-                                fasfdv
+                            
+                            <table class="table table-dark">
+                            <thead>
+                                <tr>
+                                <th scope="col">Paciente</th>
+                                <th scope="col">Obstetra</th>
+                                <th scope="col">Horario</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <?php foreach($consulta as $chave){ ?>
+                                <tr>
+                                <th> <?php echo($chave['paciente_id'])  ?> </th>
+                                <th> <?php echo($chave['obstetra_id'])  ?> </th>
+                                <th> <?php echo($chave['horario_id'])  ?> </th>
+                                </tr>
+                            <?php } ?>
+                            
+                            
+                            </tbody>
+                            </table>
                             </div>
                             <div class="tab-pane fade" id="obstetra" role="tabpanel" aria-labelledby="obstetra-tab">
                                 ..123dfgdfg33
@@ -81,6 +89,13 @@ $scripts = ""; ?>
                                 ..123dgdfg33.
                                 asfasf
                             </div>
+                        
+
+
+
+                            </div>
+                            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">.123dsgdfg..</div>
+                            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">..123dfgdfg33.</div>
                             </div>
                             </div>
                         </div>

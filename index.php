@@ -274,12 +274,12 @@
     <footer>
         <div class="container">
             <div class="social">
-                <a href="#">facebook </a>
-                <a href="#">twitter </a>
-                <a href="#">instagram </a>
-                <a href="#">google plus </a>
-                <a href="#">behance </a>
-                <a href="#">dribbble  </a>
+                <a href="#">Facebook </a>
+                <a href="#">Twitter </a>
+                <a href="#">Instagram </a>
+                <a href="#">Google plus </a>
+                <a href="#">Behance </a>
+                <a href="#">Dribbble  </a>
             </div>
             <p>Copyright © 2018 Berlin, All rights Reserved. <br/>
 Created by tavonline</p>

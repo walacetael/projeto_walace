@@ -1,41 +1,115 @@
 <?php  
-function conexao(){
-$host = '127.0.0.1';
-$db   = 'projeto';
-$user = 'walace';
-$pass = 'password';
-$charset = 'utf8mb4';
+require_once('conexao.php');
 
-$options = [
-    PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
-    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-    PDO::ATTR_EMULATE_PREPARES   => false,
-];
-$dsn = "mysql:host=$host;dbname=$db;charset=$charset";
-try {
-     $pdo = new PDO($dsn, $user, $pass, $options);
-} catch (\PDOException $e) {
-     throw new \PDOException($e->getMessage(), (int)$e->getCode());
-}
- return $pdo;
-}
+//Tabela e colunas e where
+function select($tabela,$colunas, $where= false){
+  $pdo=conexao();     
+                        if($where){
+                          foreach($where as $chave => $valor){    
+                            if(sizeof($where)>1){
+                              $where .= $chave.' = "'.$valor.'",';
+                            }
+                            else
+                            {
+                              $where = $chave.' = "'.$valor.'"';
+                            }
+                          }
+                          $valores = $pdo->query('SELECT '.$colunas.' FROM '.$tabela.' WHERE '.$where);
+                        }else{
+                            $valores = $pdo->query('SELECT '.$colunas.' FROM '.$tabela);
+                        }
 
-inser("*","carlos","id = 1 and ");
-
-function insert($colunas,$tabela, $where, $limit){
-$pdo = conexao();
-if(isset($where)){
-    $pdo->query('select '.$colunas.' from '.$tabela.' where'.$where);
-}else{
-    $pdo->query('select '.$colunas.' from '.$tabela);
+                        return $valores->fetchAll();
 }
 
 
 
-
+//Tabela e Valores array ex: nome=>$valor
+function insert($tabela,$valores){
+  $pdo=conexao();
+  try {
+      foreach($valores as $chave => $valor){    
+        if(sizeof($valores)>1){
+          $parametro .= ':'.$chave.', ';
+          $colunas .= $chave.',';
+        }
+        else
+        {
+          $parametro = ':'.$chave;
+          $colunas = $chave;
+        }
+        $execute[':'.$chave]= $valor;  
+        };
+        $stmt = $pdo->prepare('INSERT INTO '.$tabela.' ('.$colunas.') VALUES('.$parametro.')');
+        $stmt->execute($execute);
+        echo $stmt->rowCount(); 
+  }
+    catch(PDOException $e) 
+  {
+    echo 'Error: ' . $e->getMessage();
+  }
+  }
+//update tabela , valor , where
+function update($tabela,$valores,$where) {
+  try{
+        foreach($valores as $chave => $valor){    
+          if(sizeof($valores)>1){
+            $valores .= $chave.' = :'.$chave.', ';
+          }
+          else
+          {
+            $valores = $chave.' = :'.$chave;
+          }
+        $execute[':'.$chave]= $valor;  
+        };
+        foreach($where as $chave => $valor){    
+          if(sizeof($where)>1){
+            $where .= $chave.' = :'.$chave.', ';
+          }
+          else
+          {
+            $where = $chave.' = :'.$chave;
+          }
+        $execute[':'.$chave]= $valor;  
+        };
+  $stmt = $pdo->prepare('UPDATE '.$tabela.' set '.$valores.' WHERE '.$where);
+  $stmt->execute($execute);
+     
+  return $stmt->rowCount();
+} catch(PDOException $e) {
+  return 'Error: ' . $e->getMessage();
+}
 
 }
 
+
+
+
+
+function delete($tabela,$where) {
+  $pdo=conexao();
+  try{
+        foreach($where as $chave => $valor){    
+          if(sizeof($where)>1){
+            $where2 .= $chave.' = :'.$chave.', ';
+          }
+          else
+          {
+            $where2 = $chave.' = :'.$chave;
+          }
+        $execute[':'.$chave]= $valor;  
+        };
+  $stmt = $pdo->prepare('DELETE FROM '.$tabela.' WHERE '.$where2);
+  $stmt->execute($execute);
+     
+  return $stmt->rowCount();
+  } 
+  catch(PDOException $e)
+  {
+  return 'Error: ' . $e->getMessage();
+  }
+
+}
 
 
 
