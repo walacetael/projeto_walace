@@ -1,8 +1,10 @@
 <?php include('../include/header.php') ?>
 <?php include('../funcoes/funcoes.php'); ?>
-<?php $consulta = select('consultas JOIN paciente ON paciente.id=consultas.paciente_id JOIN obstetra ON obstetra.id = consultas.obstetra_id ','*');  ?>
-<?php var_dump($consulta)?>
+<?php 
 
+$consulta = select('consultas 
+JOIN obstetra ON consultas.obstetra_id = obstetra.id
+JOIN paciente ON consultas.obstetra_id = paciente.id','obstetra.nome as nome_obstetra, paciente.nome as nome_paciente, consultas.dia_hora_consulta'); ?>
 
 
 <div class="container">
@@ -58,9 +60,10 @@
   <tbody>
 <?php foreach($consulta as $chave){ ?>
     <tr>
-      <th> <?php echo($chave['paciente_id'])  ?> </th>
-      <th> <?php echo($chave['obstetra_id'])  ?> </th>
-      <th> <?php echo($chave['horario_id'])  ?> </th>
+    
+      <th> <?php  echo($chave['nome_paciente'])  ?> </th>
+      <th> <?php  echo($chave['nome_obstetra'])  ?> </th>
+      <th> <?php  echo($chave['dia_hora_consulta'])  ?> </th>
     </tr>
 <?php } ?>
   

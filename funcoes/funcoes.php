@@ -7,11 +7,11 @@ function select($tabela,$colunas, $where= false){
                         if($where){
                           foreach($where as $chave => $valor){    
                             if(sizeof($where)>1){
-                              $where .= $chave.' = "'.$valor.'",';
+                              $where .= $chave.' '.$valor.', ';
                             }
                             else
                             {
-                              $where = $chave.' = "'.$valor.'"';
+                              $where = $chave.' '.$valor.'';
                             }
                           }
                           $valores = $pdo->query('SELECT '.$colunas.' FROM '.$tabela.' WHERE '.$where);
