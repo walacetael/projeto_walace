@@ -2,7 +2,7 @@
 require_once('conexao.php');
 
 //Tabela e colunas e where
-function select($tabela,$colunas, $where= false){
+function select($tabela,$colunas, $where= false,$order_by=false){
   $pdo=conexao();     
                         if($where){
                           foreach($where as $chave => $valor){    
@@ -14,9 +14,19 @@ function select($tabela,$colunas, $where= false){
                               $where = $chave.' '.$valor.'';
                             }
                           }
-                          $valores = $pdo->query('SELECT '.$colunas.' FROM '.$tabela.' WHERE '.$where);
-                        }else{
-                            $valores = $pdo->query('SELECT '.$colunas.' FROM '.$tabela);
+                          if($order_by){
+                            $valores = $pdo->query('SELECT '.$colunas.' FROM '.$tabela.' WHERE '.$where.' '.$order_by);
+                            
+                          }else{
+                            
+                            $valores = $pdo->query('SELECT '.$colunas.' FROM '.$tabela.' WHERE '.$where);
+
+                          }
+                        }
+                        else
+                        {
+                            
+                            $valores = $pdo->query('SELECT '.$colunas. ' FROM '.$tabela);
                         }
 
                         return $valores->fetchAll();
@@ -28,10 +38,19 @@ function select($tabela,$colunas, $where= false){
 function insert($tabela,$valores){
   $pdo=conexao();
   try {
-      foreach($valores as $chave => $valor){    
+    $index=1;  
+    foreach($valores as $chave => $valor){    
         if(sizeof($valores)>1){
-          $parametro .= ':'.$chave.', ';
-          $colunas .= $chave.',';
+          if($index == sizeof($valores)){
+            $parametro .= ':'.$chave.'';
+          }else{
+            $parametro .= ':'.$chave.', ';
+          }
+          if($index == sizeof($valores)){
+          $colunas .= $chave.'';
+          }else{
+          $colunas .= $chave.', ';
+          }
         }
         else
         {
@@ -39,15 +58,19 @@ function insert($tabela,$valores){
           $colunas = $chave;
         }
         $execute[':'.$chave]= $valor;  
-        };
+    $index++;
+      
+      };
         $stmt = $pdo->prepare('INSERT INTO '.$tabela.' ('.$colunas.') VALUES('.$parametro.')');
         $stmt->execute($execute);
-        echo $stmt->rowCount(); 
-  }
-    catch(PDOException $e) 
-  {
-    echo 'Error: ' . $e->getMessage();
-  }
+        $consulta = $pdo->query("SELECT LAST_INSERT_ID()");
+        $id = $consulta->fetchColumn();
+      }
+      catch(PDOException $e) 
+      {
+        echo 'Error: ' . $e->getMessage();
+      }
+      return $id; 
   }
 //update tabela , valor , where
 function update($tabela,$valores,$where) {

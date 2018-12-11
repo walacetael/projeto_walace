@@ -3,7 +3,7 @@
 function conexao(){
     $host = '127.0.0.1';
     $db   = 'projeto_walace';
-    $user = 'root';
+    $user = 'walace';
     $pass = 'password';
     $charset = 'utf8mb4';
     
