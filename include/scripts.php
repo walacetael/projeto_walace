@@ -51,4 +51,8 @@ $(document).ready(function () {
     });
 });
 
+<?php if(isset($script)){
+    echo($script);
+} ?>
 </script>
+
