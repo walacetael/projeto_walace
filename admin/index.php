@@ -1,13 +1,13 @@
 <?php include('../include/header.php') ?>
 <?php include('../funcoes/funcoes.php'); ?>
 <?php 
-
+$obstetra = ['nome'=> 'walace','telefone'=> '123123'];
 $consulta = select('consultas 
 JOIN obstetra ON consultas.obstetra_id = obstetra.id
 JOIN paciente ON consultas.obstetra_id = paciente.id','obstetra.nome as nome_obstetra, paciente.nome as nome_paciente, consultas.dia_hora_consulta'); ?>
+<--!  asdsd --!>
 
-
-<div class="container">
+<div class="container"> 
         <div class="row">
             <div class="col-12">
                 <div class="card">
