@@ -273,16 +273,18 @@ input:-webkit-autofill {
 }
 
 .home-content{
+    background:url(../../imagens/associacaoportuguesadereiki.jpg) bottom center;
    display: table-cell;
    vertical-align: middle;
    text-align: center;
    z-index: 2;
    position: relative;
+   
 }
 
 .home-content h1{
    font-size: 75px;
-   color: #fff;
+   color:black
    font-weight: bold;
    letter-spacing: -3px;
    margin-bottom: 20px;

@@ -262,7 +262,7 @@ input:-webkit-autofill {
 /*------------------------ 2 Home ------------------------*/		
 
 .home{
-    background:url(../images/home.jpg) bottom center;
+    
     width: 100%;
     display: table;
 }
@@ -273,6 +273,7 @@ input:-webkit-autofill {
 }
 
 .home-content{
+    background:url(../images/background.jpg) bottom center;
    display: table-cell;
    vertical-align: middle;
    text-align: center;

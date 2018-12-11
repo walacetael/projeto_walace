@@ -30,11 +30,11 @@
             <input type="password" class="form-control" id="inputPassword" placeholder="senha" require name="senha">
         </div>
 
+    <p class="botto-text" style="color:black"> Cadastre-se <a href="cadastrar.php">Aqui!</a> </p>
         <button type="submit" class="btn btn-primary">login</button>
 
     </form>
     </div>
-    <p class="botto-text"> Pre-natal! pre-vida! </p>
 </div>
 </div>
 </div>
