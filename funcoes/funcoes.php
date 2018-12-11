@@ -86,26 +86,37 @@ function insert($tabela,$valores){
 function update($tabela,$valores,$where) {
   try{
         foreach($valores as $chave => $valor){    
-          if(sizeof($valores)>1){
-            $valores .= $chave.' = :'.$chave.', ';
-          }
-          else
-          {
-            $valores = $chave.' = :'.$chave;
-          }
+              if(sizeof($valores)>1){
+                  if($index == sizeof($valores)){
+                      $valores .= $chave.' = :'.$chave.' ';
+                  }
+                  else
+                  {
+                      $valores .= $chave.' = :'.$chave.' ,';
+                  }
+              }
+              else
+              {
+                    $valores = $chave.' = :'.$chave;
+              }
         $execute[':'.$chave]= $valor;  
         };
-        foreach($where as $chave => $valor){    
-          if(sizeof($where)>1){
-            $where .= $chave.' = :'.$chave.', ';
-          }
-          else
-          {
-            $where = $chave.' = :'.$chave;
-          }
-        $execute[':'.$chave]= $valor;  
-        };
-  $stmt = $pdo->prepare('UPDATE '.$tabela.' set '.$valores.' WHERE '.$where);
+                      foreach($where as $chave => $valor){    
+                            if(sizeof($where)>1){
+                              if($index == sizeof($where)){
+                                $where_string .= $chave.' '.$valor.'"';
+                              }else{
+                                $where_string .= $chave.' '.$valor.'" AND ';
+                              }
+                            }
+                            else
+                            {
+                              $where_string = $chave.' '.$valor.'"';
+                            }
+                            $index++;
+                          }
+                          echo($where_string);
+  $stmt = $pdo->prepare('UPDATE '.$tabela.' set '.$valores.' WHERE '.$where_string);
   $stmt->execute($execute);
      
   return $stmt->rowCount();
@@ -151,7 +162,7 @@ return $s;
 } 
 
 function pesquisar_cod($codigo){
-    $where=['codvalidacao'=>' = "'.$codigo.'"'];
+    $where=['codvalidacao'=>' = "'.$codigo.''];
     return $return = select('valida_paciente','*',$where);
    
 }  

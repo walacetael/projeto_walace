@@ -1,5 +1,6 @@
 <?php 
-
-session_start();
-var_dump($_SESSION['email']);
+include('funcoes/funcoes.php');
+$where = ['id'=>'=" 4'];
+$valores = ['status'=>'indisponivel'];
+update('valida_paciente');
 ?>

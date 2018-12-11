@@ -57,15 +57,15 @@ $paciente = select('paciente JOIN usuarios ON usuarios.id = paciente.usuario_id'
                             </li>
                             <!-- obstetra -->
                             <li class="nav-item">
-                                <a class="nav-link" id="obstetra-tab" data-toggle="tab" href="#obst" role="tab" aria-controls="obstetra" aria-selected="false">Obstetra</a>
+                                <a class="nav-link" id="atend-tab" data-toggle="tab" href="#ated" role="tab" aria-controls="atend" aria-selected="false">Atendimentos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="obstetra-tab" data-toggle="tab" href="#obst" role="tab" aria-controls="obstetra" aria-selected="false">Obstetras</a>
                             </li>
                             <!-- atendimento -->
-                            <li class="nav-item">
-                                <a class="nav-link" id="atend-tab" data-toggle="tab" href="#ated" role="tab" aria-controls="atend" aria-selected="false">Atendimento</a>
-                            </li>
                             <!-- paciente -->
                             <li class="nav-item">
-                                <a class="nav-link" id="paciente-tab" data-toggle="tab" href="#paciente" role="tab" aria-controls="paciente" aria-selected="false">Paciente</a>
+                                <a class="nav-link" id="paciente-tab" data-toggle="tab" href="#paciente" role="tab" aria-controls="paciente" aria-selected="false">Pacientes</a>
                             </li>
                             <!-- relatorio de erros -->
                             <li class="nav-item">
@@ -98,7 +98,7 @@ $paciente = select('paciente JOIN usuarios ON usuarios.id = paciente.usuario_id'
                                                     </table>
                             </div>
                             <div class="tab-pane fade " role="tabpanel" aria-labelledby="consultas-tab" id="ated">
-                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#atendente">
+                                                <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#atendente">
                                                 Adicionar atendente
                                                 </button>
                                                 <table class="table table-dark">
@@ -127,7 +127,7 @@ $paciente = select('paciente JOIN usuarios ON usuarios.id = paciente.usuario_id'
                                                 </div>
                             <!-- obstetra -->                        
                             <div class="tab-pane fade" role="tabpanel" aria-labelledby="obstetra-tab" id="obst">
-                                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#obstetra">
+                                                    <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#obstetra">
                                                     Adicionar obstetra
                                                     </button>
                                                     <table class="table table-dark">

@@ -7,11 +7,9 @@ $usuario = select('usuarios','id,id_nivel_acesso', $where , false);
 if ($usuario) {
 
     if($usuario[0]['id_nivel_acesso']==$id){
-  
         
     }else{
         header("Location: ../login.php");
-
     }
     
 }else{

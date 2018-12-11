@@ -2,8 +2,11 @@
 <?php include('../funcoes/funcoes.php'); ?>
 <?php 
 session_start();
-$codigos = select('valida_paciente',' * ',$where=false ,' ORDER BY id DESC');
 $id=4;
+include('../cookie.php');
+$codigos = select('valida_paciente',' * ',$where=false ,' ORDER BY id DESC');
+$obstetra = select('obstetra JOIN usuarios ON usuarios.id = obstetra.usuario_id',' * ');
+$paciente = select('paciente JOIN usuarios ON usuarios.id = paciente.usuario_id',' * ');
 ?>
 <div class="container">
         <div class="row">
@@ -46,15 +49,24 @@ $id=4;
                             <li class="nav-item">
                                 <a class="nav-link" id="consultas-tab" data-toggle="tab" href="#consultas" role="tab" aria-controls="consultas" aria-selected="false">Fila de espera</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="obstetra-tab" data-toggle="tab" href="#obst" role="tab" aria-controls="obstetra" aria-selected="false">Obstetras</a>
+                            </li>
+                            <!-- atendimento -->
+                            <!-- paciente -->
+                            <li class="nav-item">
+                                <a class="nav-link" id="paciente-tab" data-toggle="tab" href="#paciente" role="tab" aria-controls="paciente" aria-selected="false">Pacientes</a>
+                            </li>
+                            
                             </ul>
                             <!-- stendente -->
                             <div class="tab-content" id="myTabContent">
-                            <div class="tab-pane fade" role="tabpanel" aria-labelledby="consultas-tab" id="consultas">
+                            <div class="tab-pane fade show active" role="tabpanel" aria-labelledby="consultas-tab" id="consultas">
                                <form action="valida_paciente/gerar_codigo.php" method="post">
                                     <div class="form-group">
                                         <label for="nome"></label>
                                     </div>
-                                    <button type="submit" class="btn btn-primary">Gerar novo codigo</button>
+                                    <button type="submit" class="btn btn-primary float-right">Gerar novo codigo</button>
                                     </form>
                                       <table class="table table-dark">
                                                     <thead>
@@ -78,6 +90,60 @@ $id=4;
                                                     </table>
                          <?php include("valida_paciente/validar_paciente_modal_adicionar.php") ?>
                             </div>
+                             <div class="tab-pane fade" role="tabpanel" aria-labelledby="obstetra-tab" id="obst">
+                                                    <table class="table table-dark">
+                                                    <thead>
+                                                        <tr>
+                                                        <th scope="col">Nome</th>
+                                                        <th scope="col">Email</th>
+                                                        <th scope="col">Telefone</th>
+                                                        <th scope="col">formaçao</th>
+                                                        <th scope="col">Senha</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <?php foreach($obstetra as $chave){ ?>
+                                                        <tr>
+                                                        
+                                                        <th> <?php  echo($chave['nome'])  ?> </th>
+                                                        <th> <?php  echo($chave['email'])  ?> </th>
+                                                        <th> <?php  echo($chave['telefone'])  ?> </th>
+                                                        <th> <?php  echo($chave['formacao'])  ?> </th>
+                                                        <th> <?php  echo($chave['senha'])  ?> </th>
+                                                        </tr>
+                                                    <?php } ?>
+                                                    
+                                                    </tbody>
+                                                    </table>
+                                                    <?php include("obstetra/obstetra_modal_adicionar.php") ?>
+                                                    </div>
+                            <!-- paciente -->
+                            <div class="tab-pane fade" id="paciente" role="tabpanel" aria-labelledby="consultas-tab">
+                                                <table class="table table-dark">
+                                                <thead>
+                                                    <tr>
+                                                    <th scope="col">Nome</th>
+                                                    <th scope="col">Email</th>
+                                                    <th scope="col">Telefone</th>
+                                                    <th scope="col">data de nascimento</th>
+                                                    <th scope="col">Senha</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                <?php foreach($paciente as $chave){ ?>
+                                                    <tr>
+                                                    
+                                                    <th> <?php  echo($chave['nome'])  ?> </th>
+                                                    <th> <?php  echo($chave['email'])  ?> </th>
+                                                    <th> <?php  echo($chave['telefone'])  ?> </th>
+                                                    <th> <?php  echo($chave['data_de_nasc'])  ?> </th>
+                                                    <th> <?php  echo($chave['senha'])  ?> </th>
+                                                    </tr>
+                                                <?php } ?>
+                                                
+                                                </tbody>
+                                                </table>
+                                                </div>
                             </div>
                             </div>
                         </div>

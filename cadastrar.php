@@ -16,12 +16,19 @@ $paciente['telefone']=$_POST['telefone'];
 $paciente['data_de_nasc']=$_POST['data_de_nasc'];
 $paciente['valida_paciente_id']=$valor[0]['id'];
 $paciente['usuario_id']=$id_usuario;
-insert('paciente',$paciente);
+$id = insert('paciente',$paciente);
+
 
 $_SESSION['msg'] = 'Cadastrado Com sucesso';  
 header("Location: cadastro.php");
 
-        
-    }
+}else{
+
+    $_SESSION['msg'] = 'Codigo Indisponivel! pegue seu codigo de acesso na clinica medica mais proxima';  
 }
+}else{
+
+    $_SESSION['msg'] = 'Não foi possivel cadastrar';  
+}
+header("Location: cadastro.php");
 
