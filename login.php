@@ -21,13 +21,13 @@
    <h2>Login</h2>
    <p>preencha os campos com os teus dados pessoais</p>
    </div>
-   <form id="Login">
+   <form id="Login" method="post" action="logar.php">
         <div class="form-group">
-           <input type="email" class="form-control" id="inputEmail" placeholder="Email" require>
+           <input type="email" class="form-control" id="inputEmail" placeholder="Email" require name="email">
         </div>
         
         <div class="form-group">
-            <input type="password" class="form-control" id="inputPassword" placeholder="senha" require>
+            <input type="password" class="form-control" id="inputPassword" placeholder="senha" require name="senha">
         </div>
 
         <button type="submit" class="btn btn-primary">login</button>

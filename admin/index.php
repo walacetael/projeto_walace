@@ -2,14 +2,14 @@
 <?php include('../funcoes/funcoes.php'); ?>
 <?php 
 session_start();
+$id=1;
+ include('../cookie.php');
+ 
 $consulta = select('consultas 
 JOIN obstetra ON consultas.obstetra_id = obstetra.id 
 JOIN paciente ON consultas.obstetra_id = paciente.id','obstetra.nome as nome_obstetra, paciente.nome as nome_paciente, consultas.dia_hora_consulta'); 
-
 $atendimento = select("atendimento JOIN usuarios ON usuarios.id = atendimento.usuario_id"," * ");
-
 $obstetra = select('obstetra JOIN usuarios ON usuarios.id = obstetra.usuario_id',' * ');
-
 $paciente = select('paciente JOIN usuarios ON usuarios.id = paciente.usuario_id',' * ');
 ?>
 <div class="container">
@@ -31,6 +31,11 @@ $paciente = select('paciente JOIN usuarios ON usuarios.id = paciente.usuario_id'
                                 </div>
                                 <div class="ml-auto">
                                     <input type="button" class="btn btn-primary d-none" id="btnDiscard" value="Discard Changes" />
+                                    
+                                    <form action="./index.php" class="float-right" method="post">
+                                    <button class="btn btn-primary " name="logout">Sair</button>
+                                    </form>
+
                                 </div>
                             </div>
                                 <?php if(isset($_SESSION['msg'])){ ?>
@@ -69,9 +74,32 @@ $paciente = select('paciente JOIN usuarios ON usuarios.id = paciente.usuario_id'
                             </ul>
                             <!-- stendente -->
                             <div class="tab-content" id="myTabContent">
-                            <div class="tab-pane fade" role="tabpanel" aria-labelledby="consultas-tab" id="ated">
+                            <div class="tab-pane fade show active" id="consultas" role="tabpanel" aria-labelledby="consultas-tab">
+                            <!-- area de consulta -->
+                                                    <table class="table table-dark">
+                                                    <thead>
+                                                        <tr>
+                                                        <th scope="col">Paciente</th>
+                                                        <th scope="col">Obstetra</th>
+                                                        <th scope="col">Horario</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <?php foreach($consulta as $chave){ ?>
+                                                        <tr>
+                                                        
+                                                        <th> <?php  echo($chave['nome_paciente'])  ?> </th>
+                                                        <th> <?php  echo($chave['nome_obstetra'])  ?> </th>
+                                                        <th> <?php  echo($chave['dia_hora_consulta'])  ?> </th>
+                                                        </tr>
+                                                    <?php } ?>
+                                                    
+                                                    </tbody>
+                                                    </table>
+                            </div>
+                            <div class="tab-pane fade " role="tabpanel" aria-labelledby="consultas-tab" id="ated">
                                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#atendente">
-                                                adicionar atendente
+                                                Adicionar atendente
                                                 </button>
                                                 <table class="table table-dark">
                                                 <thead>
@@ -100,7 +128,7 @@ $paciente = select('paciente JOIN usuarios ON usuarios.id = paciente.usuario_id'
                             <!-- obstetra -->                        
                             <div class="tab-pane fade" role="tabpanel" aria-labelledby="obstetra-tab" id="obst">
                                                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#obstetra">
-                                                    adicionar obstetra
+                                                    Adicionar obstetra
                                                     </button>
                                                     <table class="table table-dark">
                                                     <thead>
@@ -130,7 +158,7 @@ $paciente = select('paciente JOIN usuarios ON usuarios.id = paciente.usuario_id'
                                                     </div>
                             <!-- paciente -->
                             <div class="tab-pane fade" id="paciente" role="tabpanel" aria-labelledby="consultas-tab">
-                                                paciente
+                                                Paciente
                                                 <table class="table table-dark">
                                                 <thead>
                                                     <tr>
@@ -160,29 +188,7 @@ $paciente = select('paciente JOIN usuarios ON usuarios.id = paciente.usuario_id'
                             <div class="tab-pane fade" id="relat" role="tabpanel" aria-labelledby="consultas-tab">
                                     relatorio de erros
                             </div>
-                            <div class="tab-pane fade" id="consultas" role="tabpanel" aria-labelledby="consultas-tab">
-                            <!-- area de consulta -->
-                                                    <table class="table table-dark">
-                                                    <thead>
-                                                        <tr>
-                                                        <th scope="col">Paciente</th>
-                                                        <th scope="col">Obstetra</th>
-                                                        <th scope="col">Horario</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                    <?php foreach($consulta as $chave){ ?>
-                                                        <tr>
-                                                        
-                                                        <th> <?php  echo($chave['nome_paciente'])  ?> </th>
-                                                        <th> <?php  echo($chave['nome_obstetra'])  ?> </th>
-                                                        <th> <?php  echo($chave['dia_hora_consulta'])  ?> </th>
-                                                        </tr>
-                                                    <?php } ?>
-                                                    
-                                                    </tbody>
-                                                    </table>
-                            </div>
+                          
                             </div>
                             </div>
                         </div>
@@ -195,5 +201,13 @@ $paciente = select('paciente JOIN usuarios ON usuarios.id = paciente.usuario_id'
         </div>
     </div>
 <?php include('../include/bottom.php');
- session_destroy();?>
-<?php include('../include/scripts.php') ?>
+?>
+<?php include('../include/scripts.php');
+if(isset($_POST['logout'])){
+session_unset();
+session_destroy();
+ob_end_clean();
+header("Location: ../login.php");
+}
+
+unset($_SESSION['msg']);?>

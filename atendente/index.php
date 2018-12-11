@@ -2,7 +2,8 @@
 <?php include('../funcoes/funcoes.php'); ?>
 <?php 
 session_start();
-$codigos = select('valida_paciente',' * ',$where=false,' ORDER BY id DESC');
+$codigos = select('valida_paciente',' * ',$where=false ,' ORDER BY id DESC');
+$id=4;
 ?>
 <div class="container">
         <div class="row">
@@ -23,6 +24,9 @@ $codigos = select('valida_paciente',' * ',$where=false,' ORDER BY id DESC');
                                 </div>
                                 <div class="ml-auto">
                                     <input type="button" class="btn btn-primary d-none" id="btnDiscard" value="Discard Changes" />
+                               <form action="./index.php" class="float-right" method="post">
+                                    <button class="btn btn-primary " name="logout">Sair</button>
+                                    </form>
                                 </div>
                             </div>
                                 <?php if(isset($_SESSION['msg'])){ ?>
@@ -86,7 +90,13 @@ $codigos = select('valida_paciente',' * ',$where=false,' ORDER BY id DESC');
         </div>
     </div>
 <?php include('../include/bottom.php');
- session_destroy();?>
+if(isset($_POST['logout'])){
+    session_unset();
+    session_destroy();
+    ob_end_clean();
+    header("Location: ../login.php");
+}
+ unset($_SESSION['msg']);;?>
 <?php 
 include('../include/scripts.php');
 

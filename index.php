@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="pt-br">
 <head>
-<title>pagina- prenatal e suas curiosidades</title>
+<title>Pagina- prenatal e suas curiosidades</title>
 <meta charset="UTF-8">
 <meta name="description" content="prenatal Portfolio">
 <meta name="keywords" content="prenatal, acompanhamento de gestante, gravidez">
@@ -44,10 +44,10 @@
                 <div class="responsive"><i data-icon="m" class="icon"></i></div>
                 <ul class="nav-menu">
                     <li><a href="#home" class="smoothScroll">Inicial</a></li>
-                    <li><a href="#about" class="smoothScroll">conteudo</a></li>
-                    <li><a href="#portfolio" class="smoothScroll">novidades</a></li>
+                    <li><a href="#about" class="smoothScroll">Conteudo</a></li>
+                    <li><a href="#portfolio" class="smoothScroll">Novidades</a></li>
                     <li><a href="#blog" class="smoothScroll">Cadastro</a></li>
-                    <li><a href="#contact" class="smoothScroll">contato</a></li>
+                    <li><a href="#contact" class="smoothScroll">Contato</a></li>
                 </ul>
             </div>
         </div>

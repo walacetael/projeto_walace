@@ -11,6 +11,6 @@ $atendente['telefone'] = $_POST['telefone'];
 $atendente['usuario_id'] = $id_usuario;
 
 insert('atendimento',$atendente);
-$_SESSION['msg'] = 'atendente cadastrado.';
+$_SESSION['msg'] = 'Atendente Cadastrado.';
 header("Location: ../index.php");
 ?>

@@ -5,28 +5,38 @@ require_once('conexao.php');
 function select($tabela,$colunas, $where= false,$order_by=false){
   $pdo=conexao();     
                         if($where){
+                          $index=1;
                           foreach($where as $chave => $valor){    
                             if(sizeof($where)>1){
-                              $where .= $chave.' '.$valor.', ';
+                              if($index == sizeof($where)){
+                                $where_string .= $chave.' '.$valor.'"';
+                              }else{
+                                $where_string .= $chave.' '.$valor.'" AND ';
+                              }
                             }
                             else
                             {
-                              $where = $chave.' '.$valor.'';
+                              $where_string = $chave.' '.$valor.'"';
                             }
+                            $index++;
                           }
                           if($order_by){
                             $valores = $pdo->query('SELECT '.$colunas.' FROM '.$tabela.' WHERE '.$where.' '.$order_by);
-                            
+                          
                           }else{
-                            
-                            $valores = $pdo->query('SELECT '.$colunas.' FROM '.$tabela.' WHERE '.$where);
-
+                            $valores = $pdo->query('SELECT '.$colunas.' FROM '.$tabela.' WHERE '.$where_string);
                           }
                         }
                         else
                         {
+                       if($order_by){
+                            $valores = $pdo->query('SELECT '.$colunas.' FROM '.$tabela.' '.$order_by);
                             
-                            $valores = $pdo->query('SELECT '.$colunas. ' FROM '.$tabela);
+                          }else{
+                            
+                            $valores = $pdo->query('SELECT '.$colunas.' FROM '.$tabela);
+
+                          }
                         }
 
                         return $valores->fetchAll();
@@ -134,7 +144,17 @@ function delete($tabela,$where) {
 
 }
 
+function gerar_codigo($c, $l, $u = FALSE) { 
+if (!$u) for ($s = '', $i = 0, $z = strlen($c)-1; $i < $l; $x = rand(0,$z), $s .= $c{$x}, $i++); 
+else for ($i = 0, $z = strlen($c)-1, $s = $c{rand(0,$z)}, $i = 1; $i != $l; $x = rand(0,$z), $s .= $c{$x}, $s = ($s{$i} == $s{$i-1} ? substr($s,0,-1) : $s), $i=strlen($s)); 
+return $s; 
+} 
 
+function pesquisar_cod($codigo){
+    $where=['codvalidacao'=>' = "'.$codigo.'"'];
+    return $return = select('valida_paciente','*',$where);
+   
+}  
 
 
 

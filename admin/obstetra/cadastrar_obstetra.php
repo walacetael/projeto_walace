@@ -28,4 +28,5 @@ $obstetra['usuario_id'] = $id_usuario;
 $obstetra['horario_id'] = $id_horario;
 insert('obstetra',$obstetra);
 $_SESSION['msg'] = 'obstetra cadastrado.';
+header("Location: ../index.php");
 ?>
